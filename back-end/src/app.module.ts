@@ -16,7 +16,7 @@ import { AppService } from './app.service';
         },
       },
       defaults: {
-        from: `"No Reply" <${'fcoreteam@mail.ru'}>`,
+        from: `"Заявка" <${'fcoreteam@mail.ru'}>`,
       },
     }),
   ],

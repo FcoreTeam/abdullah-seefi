@@ -7,12 +7,38 @@ import MainForm from "./main-form/Main-form";
 const Main = () => {
   const imageRef = useRef<HTMLImageElement>(null);
   const [imageStyle, setImageStyle] = useState<React.CSSProperties>({});
+  const [isMobile, setIsMobile] = useState(false);
   const targetProgress = useRef(0);
   const currentProgress = useRef(0);
   const rafId = useRef<number | null>(null);
   const maxProgress = useRef(0);
 
   useEffect(() => {
+    // Проверка ширины экрана при загрузке
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    checkMobile(); // Проверить при первоначальной загрузке
+
+    const handleResize = () => {
+      checkMobile();
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  useEffect(() => {
+    // Если мобильное устройство, не запускаем анимацию
+    if (isMobile) {
+      setImageStyle({});
+      return;
+    }
+
     const calculateProgress = () => {
       const introSection = document.querySelector(`.${styles.main__intro}`);
       const aboutSection = document.querySelector(`.${styles.main__about}`);
@@ -34,8 +60,10 @@ const Main = () => {
 
     const updateImagePosition = () => {
       const progress = currentProgress.current;
-      const translateY = 1520 * progress;
-      const translateX = 600 * progress;
+      const translateY =
+        window.innerWidth < 1320 ? 1720 * progress : 1520 * progress;
+      const translateX =
+        window.innerWidth < 1320 ? 200 * progress : 600 * progress;
 
       setImageStyle({
         transform: `translate(${translateX}px, ${translateY}px)`,
@@ -97,7 +125,7 @@ const Main = () => {
         cancelAnimationFrame(rafId.current);
       }
     };
-  }, []);
+  }, [isMobile]);
 
   const scrollToElement = (elementId: string) => {
     const element = document.getElementById(elementId);
@@ -113,14 +141,22 @@ const Main = () => {
     <>
       <div className={styles.main__bg}></div>
       <div className={styles.main__lines}></div>
-      {/* <div className={styles.composition__bg}></div> */}
+      <div className={styles.composition__bg}></div>
+
       <main className={styles.main}>
         <section className={styles.main__intro} id="main__intro">
           <div className={styles.intro__left}>
             <h1 className={styles.intro__title}>Najd</h1>
+            <div className={styles.intro__description__pos}>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              </p>
+            </div>
             <div className={styles.intro__info}>
               <p>نص نص</p>
             </div>
+
             <p className={styles.page__navigator}>
               <span style={{ color: "#fff" }}>01</span>
               <i style={{ background: "#fff" }}></i>
@@ -190,6 +226,28 @@ const Main = () => {
               <i style={{ background: "#fff" }}></i>
               <span>04</span>
             </p>
+          </div>
+          <div className={styles.composition__wrap}>
+            <div className={styles.rect}>
+              <p className={styles.title}>Duis aute</p>
+              <p className={styles.description}>Lorem ipsum, Dolor sit amet</p>
+            </div>
+            <div className={styles.rect}>
+              {" "}
+              <p className={styles.title}>Excepteur sint</p>
+              <p className={styles.description}>
+                Lorem ipsum, Dolor sit amet, Consectetur adipiscing elit, Sed do
+                eiusmod, Tempor incididunt
+              </p>
+            </div>
+            <div className={styles.rect}>
+              {" "}
+              <p className={styles.title}>Sed do eiusmod</p>
+              <p className={styles.description}>
+                Lorem ipsum, Dolor sit amet, Consectetur adipiscing elit, Sed do
+                eiusmod, Tempor incididunt, Ut labore et dolore, Magna aliqua
+              </p>
+            </div>
           </div>
           <div className={styles.compositionSVG}>
             <svg className={styles.svgTriangle} viewBox="0 0 1000 700">

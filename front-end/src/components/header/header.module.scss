@@ -56,5 +56,62 @@
             font-size: 22px;
             font-weight: 300;
         }
+
+        .hedaer__burger {
+            display: none;
+            width: 35px;
+            height: 25px;
+            align-items: center;
+            border-top: 2px solid #fff;
+            border-bottom: 2px solid #fff;
+
+            >span {
+                width: 100%;
+                height: 2px;
+                background: #fff;
+            }
+        }
+    }
+}
+
+@media(max-width: 1190px) {
+    .header {
+        .header__content {
+            .header__phone {
+                display: none;
+            }
+
+            .header__menu {
+                display: none;
+            }
+
+            .hedaer__burger {
+                display: flex;
+            }
+        }
+    }
+}
+
+@media(max-width: 466px) {
+    .header {
+        .header__content {
+            .logo__wrap {
+                .header__name {
+                    font-size: 20px;
+                }
+            }
+        }
+    }
+}
+
+@media(max-width: 341px) {
+    .header {
+        .header__content {
+            .logo__wrap {
+                .header__name {
+                    display: none;
+                }
+            }
+        }
     }
 }

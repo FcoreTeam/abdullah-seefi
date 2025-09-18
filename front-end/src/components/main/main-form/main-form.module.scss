@@ -101,3 +101,43 @@
         }
     }
 }
+
+@media(max-width: 1350px) {
+    .main__form {
+        width: 50%;
+    }
+}
+
+@media(max-width: 974px) {
+    .main__form {
+        width: 100%;
+    }
+}
+
+@media(max-width: 615px) {
+    .main__form {
+        .form__inputs {
+            >p {
+                font-size: 16px;
+            }
+
+            .input__wrap {
+                >input {
+                    font-size: 16px;
+                }
+            }
+
+        }
+
+        >button {
+            font-size: 16px;
+        }
+    }
+}
+
+@media(max-width: 398px) {
+    .main__form {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}

@@ -2,8 +2,9 @@ import Image from "next/image";
 import clsx from "clsx";
 import { useState } from "react";
 import styles from "./main-form.module.scss";
+import { sendForm } from "@/api/requests";
 
-interface FormData {
+export interface FormData {
   name: string;
   email: string;
   message: string;
@@ -21,6 +22,42 @@ const MainForm = () => {
       [key]: value,
     }));
   };
+
+  const validateForm = (type: "email" | "message" | "name"): boolean => {
+    switch (type) {
+      case "name":
+        const nameRegex = /^[^\d]*$/;
+        return formData.name.length >= 2 && nameRegex.test(formData.name);
+
+      case "email":
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(formData.email);
+
+      case "message":
+        return formData.message.length > 0 && formData.message.length <= 400;
+
+      default:
+        return false;
+    }
+  };
+  const validateAllFields = (): boolean => {
+    return (
+      validateForm("name") && validateForm("email") && validateForm("message")
+    );
+  };
+
+  const sendFormUi = async (data: FormData) => {
+    if (validateAllFields()) {
+      try {
+        const response = await sendForm(data);
+      } catch (err) {
+        throw err;
+      }
+    } else {
+      console.log("Форма содержит ошибки");
+    }
+  };
+
   return (
     <div className={styles.main__form}>
       <div className={styles.form__inputs}>
@@ -93,7 +130,7 @@ const MainForm = () => {
         </div>
       </div>
 
-      <button>Send</button>
+      <button onClick={() => sendFormUi(formData)}>Send</button>
     </div>
   );
 };

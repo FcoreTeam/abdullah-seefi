@@ -1,30 +1,50 @@
+"use client";
+import { useState } from "react";
 import Image from "next/image";
 import styles from "./header.module.scss";
 import { routes } from "./routes";
+import HeaderMenu from "./header-menu/Header-menu";
 
 const Header = () => {
-  return (
-    <header className={styles.header}>
-      <div className={styles.header__content}>
-        <div className={styles.logo__wrap}>
-          <Image
-            alt="logo"
-            src="/logo.svg"
-            width={1000}
-            height={1000}
-            className={styles.header__logo}
-          />
-          <p className={styles.header__name}>Abdullah Seefi</p>
-        </div>
+  const [isOpen, setOpen] = useState<boolean>(false);
 
-        <div className={styles.header__menu}>
-          {routes.map((item) => (
-            <p key={item.routeID}>{item.name}</p>
-          ))}
+  const handleMenu = (isOpen: boolean) => {
+    setOpen(isOpen);
+    console.log(isOpen);
+  };
+  return (
+    <>
+      <HeaderMenu isOpen={isOpen} setHandle={setOpen} />
+      <header className={styles.header}>
+        <div className={styles.header__content}>
+          <div className={styles.logo__wrap}>
+            <Image
+              alt="logo"
+              src="/logo.svg"
+              width={1000}
+              height={1000}
+              className={styles.header__logo}
+            />
+            <p className={styles.header__name}>Abdullah Seefi</p>
+          </div>
+
+          <div className={styles.header__menu}>
+            {routes.map((item) => (
+              <p key={item.routeID}>{item.name}</p>
+            ))}
+          </div>
+          <div
+            className={styles.hedaer__burger}
+            onClick={() => {
+              handleMenu(true);
+            }}
+          >
+            <span></span>
+          </div>
+          <div className={styles.header__phone}>+12 3454 6575 32</div>
         </div>
-        <div className={styles.header__phone}>+12 3454 6575 32</div>
-      </div>
-    </header>
+      </header>
+    </>
   );
 };
 export default Header;

@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState, useCallback } from "react";
 import styles from "./main.module.scss";
 import MainForm from "./main-form/Main-form";
 
@@ -12,14 +12,39 @@ const Main = () => {
   const currentProgress = useRef(0);
   const rafId = useRef<number | null>(null);
   const maxProgress = useRef(0);
+  const introSectionRef = useRef<HTMLElement>(null);
+  const aboutSectionRef = useRef<HTMLElement>(null);
+
+  const animationValues = useRef({
+    startOffset: 0,
+    endOffset: 0,
+    windowHeight: 0,
+    translateYFactor: 1720,
+    translateXFactor: 200,
+  });
 
   useEffect(() => {
-    // Проверка ширины экрана при загрузке
+    const updateFactors = () => {
+      animationValues.current.translateYFactor =
+        window.innerWidth < 1320 ? 1720 : 1520;
+      animationValues.current.translateXFactor =
+        window.innerWidth < 1320 ? 200 : 600;
+    };
+
+    updateFactors();
+    window.addEventListener("resize", updateFactors);
+
+    return () => {
+      window.removeEventListener("resize", updateFactors);
+    };
+  }, []);
+
+  useEffect(() => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 768);
     };
 
-    checkMobile(); // Проверить при первоначальной загрузке
+    checkMobile();
 
     const handleResize = () => {
       checkMobile();
@@ -32,43 +57,53 @@ const Main = () => {
     };
   }, []);
 
+  const updateImagePosition = useCallback(() => {
+    const progress = currentProgress.current;
+    const translateY = animationValues.current.translateYFactor * progress;
+    const translateX = animationValues.current.translateXFactor * progress;
+
+    setImageStyle({
+      transform: `translate(${translateX}px, ${translateY}px)`,
+      willChange: "transform",
+    });
+  }, []);
+
+  const calculateOffsets = useCallback(() => {
+    if (!introSectionRef.current || !aboutSectionRef.current) return;
+
+    const introRect = introSectionRef.current.getBoundingClientRect();
+    const aboutRect = aboutSectionRef.current.getBoundingClientRect();
+    const windowHeight = window.innerHeight;
+    const scrollY = window.scrollY;
+
+    animationValues.current.startOffset =
+      introRect.top + scrollY + introRect.height - windowHeight * 0.7;
+    animationValues.current.endOffset = aboutRect.top + scrollY;
+    animationValues.current.windowHeight = windowHeight;
+  }, []);
+
   useEffect(() => {
-    // Если мобильное устройство, не запускаем анимацию
     if (isMobile) {
       setImageStyle({});
       return;
     }
 
+    calculateOffsets();
+
     const calculateProgress = () => {
-      const introSection = document.querySelector(`.${styles.main__intro}`);
-      const aboutSection = document.querySelector(`.${styles.main__about}`);
+      if (
+        animationValues.current.startOffset === 0 &&
+        animationValues.current.endOffset === 0
+      ) {
+        calculateOffsets();
+        return 0;
+      }
 
-      if (!introSection || !aboutSection) return 0;
-
-      const introRect = introSection.getBoundingClientRect();
-      const aboutRect = aboutSection.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
       const scrollY = window.scrollY;
-
-      const startOffset =
-        introRect.top + scrollY + introRect.height - windowHeight * 0.7;
-      const endOffset = aboutRect.top + scrollY;
+      const { startOffset, endOffset } = animationValues.current;
 
       const progress = (scrollY - startOffset) / (endOffset - startOffset);
       return Math.max(0, Math.min(1, progress));
-    };
-
-    const updateImagePosition = () => {
-      const progress = currentProgress.current;
-      const translateY =
-        window.innerWidth < 1320 ? 1720 * progress : 1520 * progress;
-      const translateX =
-        window.innerWidth < 1320 ? 200 * progress : 600 * progress;
-
-      setImageStyle({
-        transform: `translate(${translateX}px, ${translateY}px)`,
-        willChange: "transform",
-      });
     };
 
     const smoothUpdate = () => {
@@ -85,47 +120,57 @@ const Main = () => {
       }
     };
 
-    const handleScroll = () => {
-      const progress = calculateProgress();
-
-      if (progress > maxProgress.current) {
-        maxProgress.current = progress;
-      }
-
-      if (progress < maxProgress.current) {
-        targetProgress.current = progress;
-      } else {
-        targetProgress.current = Math.min(progress, 0.75);
-        maxProgress.current = Math.min(maxProgress.current, 0.7);
-      }
-
-      if (!rafId.current) {
-        rafId.current = requestAnimationFrame(smoothUpdate);
-      }
-    };
-
+    let lastScrollY = window.scrollY;
     let ticking = false;
-    const throttledScroll = () => {
+
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+
+      if (Math.abs(scrollY - lastScrollY) < 5) return;
+      lastScrollY = scrollY;
+
       if (!ticking) {
         ticking = true;
+
         requestAnimationFrame(() => {
-          handleScroll();
+          const progress = calculateProgress();
+
+          if (progress > maxProgress.current) {
+            maxProgress.current = progress;
+          }
+
+          if (progress < maxProgress.current) {
+            targetProgress.current = progress;
+          } else {
+            targetProgress.current = Math.min(progress, 0.75);
+            maxProgress.current = Math.min(maxProgress.current, 0.7);
+          }
+
+          if (!rafId.current) {
+            rafId.current = requestAnimationFrame(smoothUpdate);
+          }
+
           ticking = false;
         });
       }
     };
 
-    window.addEventListener("scroll", throttledScroll, { passive: true });
+    window.addEventListener("scroll", handleScroll, { passive: true });
 
-    handleScroll();
+    const handleResizeForOffsets = () => {
+      calculateOffsets();
+    };
+
+    window.addEventListener("resize", handleResizeForOffsets);
 
     return () => {
-      window.removeEventListener("scroll", throttledScroll);
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleResizeForOffsets);
       if (rafId.current) {
         cancelAnimationFrame(rafId.current);
       }
     };
-  }, [isMobile]);
+  }, [isMobile, calculateOffsets, updateImagePosition]);
 
   const scrollToElement = (elementId: string) => {
     const element = document.getElementById(elementId);
@@ -144,7 +189,11 @@ const Main = () => {
       <div className={styles.composition__bg}></div>
 
       <main className={styles.main}>
-        <section className={styles.main__intro} id="main__intro">
+        <section
+          className={styles.main__intro}
+          id="main__intro"
+          ref={introSectionRef}
+        >
           <div className={styles.intro__left}>
             <h1 className={styles.intro__title}>Najd</h1>
             <div className={styles.intro__description__pos}>
@@ -188,7 +237,7 @@ const Main = () => {
             </div>
           </div>
         </section>
-        <section className={styles.main__about}>
+        <section className={styles.main__about} ref={aboutSectionRef}>
           <div className={styles.main__text}>
             <h2>Lorem ipsum dolor sit amet, consectetur</h2>
             <p>
@@ -320,6 +369,8 @@ const Main = () => {
           >
             <p>نص نص</p>
           </div>
+          <p className={styles.copyright}>© 2025. All rights reserved</p>
+          <p className={styles.designed__by}>Designed by Fcore</p>
         </section>
       </main>
       <div className={styles.bg__footer}></div>

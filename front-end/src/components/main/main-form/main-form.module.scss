@@ -33,6 +33,13 @@
             justify-content: flex-end;
             position: relative;
 
+            &.error {
+                border: 1px solid red;
+                border-radius: 5px;
+                border-bottom-right-radius: 100px;
+                border-top-right-radius: 100px;
+            }
+
             .complete {
                 height: 35px;
                 width: 35px;
@@ -68,6 +75,11 @@
                 padding-left: 10px;
                 outline: none;
                 background-clip: padding-box, border-box;
+
+                &.error {
+                    background: transparent;
+
+                }
 
                 &:focus {
                     background:

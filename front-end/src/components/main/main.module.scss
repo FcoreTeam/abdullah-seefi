@@ -3,6 +3,7 @@
     background: url('/bg.jpg');
     height: 2090px;
     background-size: cover;
+
     background-repeat: no-repeat;
     position: absolute;
     z-index: -1;
@@ -14,7 +15,7 @@
     position: absolute;
     pointer-events: none;
     width: 90%;
-    height: 4755px;
+    height: 4630px;
     z-index: 5;
     border-right: 1px solid #E5DFDA33;
     border-left: 1px solid #E5DFDA33;
@@ -372,8 +373,8 @@
         }
 
         .middle:hover {
-            border: 1px solid #fff; // Белая граница при наведении
-            background-color: #ffffff0a; // Легкая подсветка
+            border: 1px solid #fff;
+            background-color: #ffffff0a;
         }
 
         .bottom {
@@ -382,7 +383,7 @@
             width: 100%;
             top: 66.66%;
             left: 0;
-            border-top: 1px solid #ffffff33; // Полупрозрачная граница
+            border-top: 1px solid #ffffff33;
             box-sizing: border-box;
             display: flex;
             align-items: center;
@@ -392,8 +393,8 @@
         }
 
         .bottom:hover {
-            border: 1px solid #fff; // Белая граница при наведении
-            background-color: #ffffff0a; // Легкая подсветка
+            border: 1px solid #fff;
+            background-color: #ffffff0a;
         }
 
         .title {
@@ -408,7 +409,7 @@
         .top:hover .title,
         .middle:hover .title,
         .bottom:hover .title {
-            color: #ffffff; // Ярче при наведении
+            color: #ffffff;
             transform: scale(1.05);
         }
 
@@ -427,7 +428,7 @@
         .top:hover .description,
         .middle:hover .description,
         .bottom:hover .description {
-            color: #ffffff; // Ярче при наведении
+            color: #ffffff;
         }
 
         >h2 {
@@ -460,12 +461,31 @@
         width: 100%;
         height: 1100px;
         margin-top: 300px;
+        position: relative;
+        display: flex;
+        flex-flow: column;
+        align-items: center;
 
+
+        .designed__by,
+        .copyright {
+            color: #E5DFDACC;
+            position: absolute;
+            bottom: 50px;
+            font-family: var(--font-cormorant);
+            font-size: 39px;
+        }
+
+        .copyright {
+            font-size: 22px;
+            left: 20px;
+            bottom: 20px;
+        }
 
         .navigator__wrap {
             .page__navigator {
                 bottom: 350px;
-                left: 150px;
+                left: 0px;
             }
         }
 
@@ -507,7 +527,6 @@
         .intro__info {
             background: transparent;
             color: #fff;
-            left: -120px;
             position: absolute;
             margin-right: 60px;
             border-radius: 5px;
@@ -518,8 +537,8 @@
             margin-top: 20px;
             padding: 20px;
             padding-right: 120px;
-            bottom: 30;
-            left: 20px;
+            bottom: 60px;
+            left: -40px;
             cursor: pointer;
             z-index: 6;
 
@@ -803,7 +822,7 @@
 
 @media(max-width: 768px) {
     .main__lines {
-        height: 3650px !important;
+        height: 3614px !important;
     }
 
     .main__bg {
@@ -811,12 +830,51 @@
         background-position: 45%;
     }
 
+    .composition__bg {
+        height: 800px;
+        margin-top: 1700px;
+    }
+
+
     .main {
+        .page__navigator {
+            display: flex;
+            flex-flow: column;
+            right: 20px;
+
+            >span {
+                font-size: 14px;
+            }
+
+            >i {
+                transform: rotate(90deg);
+            }
+        }
+
+        .main__composition {
+            .navigator__wrap {
+                display: flex;
+                justify-content: flex-end;
+
+                .page__navigator {
+                    margin-right: 20px
+                }
+            }
+        }
+
         .main__about {
             margin-top: 270px !important;
 
 
+            .navigator__wrap {
+                justify-content: flex-end;
+                width: 100%;
+                display: flex;
 
+
+
+
+            }
 
 
             .main__text {
@@ -847,9 +905,15 @@
             align-items: center;
             padding-right: 0;
 
+            .page__navigator {
+                bottom: -600px !important;
+            }
+
             .intro__image {
                 margin-top: -280px;
                 scale: 0.5;
+
+                transform: scaleX(0.74) rotate(10deg);
                 margin-left: 0;
                 margin-right: 0;
             }
@@ -872,7 +936,7 @@
                 }
 
                 .page__navigator {
-                    bottom: -700;
+                    bottom: -700px;
                 }
 
                 .intro__info {
@@ -901,12 +965,51 @@
                 }
             }
         }
+
+
+
+        .main__form {
+
+            .designed__by {
+                font-size: 22px;
+                bottom: 180px;
+            }
+
+            .copyright {
+                font-size: 14px;
+            }
+
+            .intro__info {
+                bottom: 0;
+                left: 0;
+            }
+
+            .navigator__wrap {
+                display: flex;
+                justify-content: flex-end;
+
+                display: none;
+
+                .page__navigator {
+                    margin-right: 40px;
+                }
+            }
+        }
+    }
+
+    .bg__footer {
+        height: 1200px;
+        background-size: cover;
     }
 }
 
 @media(max-width: 615px) {
     .main {
         .main__composition {
+            >h2 {
+                color: #E5DFDA;
+            }
+
             .navigator__wrap {
                 margin-bottom: 20px;
             }
@@ -934,8 +1037,10 @@
             flex-flow: column;
             align-items: center !important;
 
+
             >h2 {
                 font-size: 40px;
+                color: #E5DFDACC;
             }
 
             .navigator__wrap {
@@ -964,7 +1069,11 @@
     }
 
     .main {
+
+
         .main__form {
+
+
             .intro__info {
                 margin-top: 70px;
             }
@@ -998,6 +1107,16 @@
             }
 
 
+        }
+    }
+}
+
+@media(max-width: 374px) {
+    .main {
+        .main__intro {
+            .intro__image {
+                scale: 0.54;
+            }
         }
     }
 }

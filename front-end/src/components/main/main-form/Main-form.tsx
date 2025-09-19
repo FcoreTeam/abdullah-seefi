@@ -9,6 +9,7 @@ export interface FormData {
   email: string;
   message: string;
 }
+
 const MainForm = () => {
   const [formData, setFormData] = useState<FormData>({
     name: "",
@@ -16,10 +17,32 @@ const MainForm = () => {
     message: "",
   });
 
+  const [touched, setTouched] = useState({
+    name: false,
+    email: false,
+    message: false,
+  });
+
+  const [formSubmitted, setFormSubmitted] = useState(false);
+
   const handleData = (key: string, value: string) => {
     setFormData((prev) => ({
       ...prev,
       [key]: value,
+    }));
+  };
+
+  const handleFocus = (field: string) => {
+    setTouched((prev) => ({
+      ...prev,
+      [field]: false,
+    }));
+  };
+
+  const handleBlur = (field: string) => {
+    setTouched((prev) => ({
+      ...prev,
+      [field]: true,
     }));
   };
 
@@ -40,6 +63,11 @@ const MainForm = () => {
         return false;
     }
   };
+
+  const showError = (field: "name" | "email" | "message"): boolean => {
+    return touched[field] && !validateForm(field);
+  };
+
   const validateAllFields = (): boolean => {
     return (
       validateForm("name") && validateForm("email") && validateForm("message")
@@ -47,9 +75,23 @@ const MainForm = () => {
   };
 
   const sendFormUi = async (data: FormData) => {
+    setTouched({
+      name: true,
+      email: true,
+      message: true,
+    });
+
+    setFormSubmitted(true);
+
     if (validateAllFields()) {
       try {
         const response = await sendForm(data);
+        setFormSubmitted(false);
+        setFormData({
+          name: "",
+          message: "",
+          email: "",
+        });
       } catch (err) {
         throw err;
       }
@@ -62,16 +104,25 @@ const MainForm = () => {
     <div className={styles.main__form}>
       <div className={styles.form__inputs}>
         <p>Your name</p>
-        <div className={styles.input__wrap}>
+        <div
+          className={clsx(
+            styles.input__wrap,
+            showError("name") && styles.error
+          )}
+        >
           <input
             type="text"
             value={formData.name}
             onChange={(e) => handleData("name", e.target.value)}
+            onFocus={() => handleFocus("name")}
+            onBlur={() => handleBlur("name")}
+            className={showError("name") ? styles.error : ""}
           />
           <div
             className={clsx(
               styles.complete,
-              formData.name !== "" && styles.active
+              formData.name !== "" && validateForm("name") && styles.active,
+              showError("name") && styles.error
             )}
           >
             <Image
@@ -79,22 +130,35 @@ const MainForm = () => {
               width={12}
               height={8}
               alt="check"
-              className={formData.name !== "" ? styles.active__img : ""}
+              className={clsx(
+                formData.name !== "" &&
+                  validateForm("name") &&
+                  styles.active__img
+              )}
             />
           </div>
         </div>
 
         <p>Your email</p>
-        <div className={styles.input__wrap}>
+        <div
+          className={clsx(
+            styles.input__wrap,
+            showError("email") && styles.error
+          )}
+        >
           <input
             type="text"
             value={formData.email}
             onChange={(e) => handleData("email", e.target.value)}
+            onFocus={() => handleFocus("email")}
+            onBlur={() => handleBlur("email")}
+            className={showError("email") ? styles.error : ""}
           />
           <div
             className={clsx(
               styles.complete,
-              formData.email !== "" && styles.active
+              formData.email !== "" && validateForm("email") && styles.active,
+              showError("email") && styles.error
             )}
           >
             <Image
@@ -102,21 +166,37 @@ const MainForm = () => {
               width={12}
               height={8}
               alt="check"
-              className={formData.email !== "" ? styles.active__img : ""}
+              className={clsx(
+                formData.email !== "" &&
+                  validateForm("email") &&
+                  styles.active__img
+              )}
             />
           </div>
         </div>
+
         <p>Message</p>
-        <div className={styles.input__wrap}>
+        <div
+          className={clsx(
+            styles.input__wrap,
+            showError("message") && styles.error
+          )}
+        >
           <input
             type="text"
             value={formData.message}
             onChange={(e) => handleData("message", e.target.value)}
+            onFocus={() => handleFocus("message")}
+            onBlur={() => handleBlur("message")}
+            className={showError("message") ? styles.error : ""}
           />
           <div
             className={clsx(
               styles.complete,
-              formData.message !== "" && styles.active
+              formData.message !== "" &&
+                validateForm("message") &&
+                styles.active,
+              showError("message") && styles.error
             )}
           >
             <Image
@@ -124,7 +204,11 @@ const MainForm = () => {
               width={12}
               height={8}
               alt="check"
-              className={formData.message !== "" ? styles.active__img : ""}
+              className={clsx(
+                formData.message !== "" &&
+                  validateForm("message") &&
+                  styles.active__img
+              )}
             />
           </div>
         </div>
@@ -134,4 +218,5 @@ const MainForm = () => {
     </div>
   );
 };
+
 export default MainForm;

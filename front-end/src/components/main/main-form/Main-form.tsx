@@ -2,7 +2,7 @@ import Image from "next/image";
 import clsx from "clsx";
 import { useState } from "react";
 import styles from "./main-form.module.scss";
-import { sendForm } from "@/api/requests";
+import { sendForm } from "../../../api/requests";
 
 export interface FormData {
   name: string;

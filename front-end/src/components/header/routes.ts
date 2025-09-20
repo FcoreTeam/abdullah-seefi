@@ -5,20 +5,20 @@ interface Route {
 
 export const routes: Route[] = [
   {
-    name: "مقدمة",
-    routeID: "intro",
+    name: 'مقدمة',
+    routeID: 'intro',
   },
   {
-    name: "عطر",
-    routeID: "about",
+    name: 'عطر',
+    routeID: 'about',
   },
 
   {
-    name: "تركيبة العطر",
-    routeID: "composition",
+    name: 'تركيبة العطر',
+    routeID: 'composition',
   },
   {
-    name: "اتصل بنا",
-    routeID: "form",
+    name: 'اتصل بنا',
+    routeID: 'form',
   },
 ];

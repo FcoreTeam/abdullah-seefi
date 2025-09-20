@@ -8,7 +8,7 @@ export async function POST(request: Request) {
     return NextResponse.json({
       message: 'Форма успешно отправлена!',
     });
-  } catch (error) {
+  } catch  {
     return NextResponse.json({ error: 'Invalid request' }, { status: 400 });
   }
 }

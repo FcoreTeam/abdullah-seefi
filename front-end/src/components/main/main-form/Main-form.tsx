@@ -23,7 +23,7 @@ const MainForm = () => {
     message: false,
   });
 
-  const [formSubmitted, setFormSubmitted] = useState(false);
+  /* const [formSubmitted, setFormSubmitted] = useState(false); */
 
   const handleData = (key: string, value: string) => {
     setFormData((prev) => ({
@@ -81,12 +81,12 @@ const MainForm = () => {
       message: true,
     });
 
-    setFormSubmitted(true);
+   /*  setFormSubmitted(true); */
 
     if (validateAllFields()) {
       try {
-        const response = await sendForm(data);
-        setFormSubmitted(false);
+        await sendForm(data);
+      /*   setFormSubmitted(false); */
         setFormData({
           name: "",
           message: "",

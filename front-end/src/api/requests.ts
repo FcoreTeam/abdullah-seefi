@@ -15,8 +15,8 @@ export const sendForm = async (data: ContactFormData) => {
     });
     console.log(' Ответ сервера:', response.data);
     return response;
-  } catch (err: any) {
+  } catch  {
     console.error('Full URL was:', `${process.env.NEXT_PUBLIC_DEV_API}/api/email`);
-    throw err;
+    
   }
 };

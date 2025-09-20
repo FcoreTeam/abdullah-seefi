@@ -1,68 +1,185 @@
 "use client";
 import Image from "next/image";
-import { useRef, useEffect, useState } from "react";
-import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import { useRef, useEffect, useState, useCallback } from "react";
 import styles from "./main.module.scss";
 import MainForm from "./main-form/Main-form";
 
 const Main = () => {
-  const containerRef = useRef<HTMLDivElement>(null);
+  const imageRef = useRef<HTMLImageElement>(null);
+  const [imageStyle, setImageStyle] = useState<React.CSSProperties>({});
   const [isMobile, setIsMobile] = useState(false);
+  const targetProgress = useRef(0);
+  const currentProgress = useRef(0);
+  const rafId = useRef<number | null>(null);
+  const maxProgress = useRef(0);
+  const introSectionRef = useRef<HTMLElement>(null);
+  const aboutSectionRef = useRef<HTMLElement>(null);
 
-  
+  const animationValues = useRef({
+    startOffset: 0,
+    endOffset: 0,
+    windowHeight: 0,
+    translateYFactor: 1720,
+    translateXFactor: 200,
+  });
+
+  useEffect(() => {
+  const updateFactors = () => {
+    const isMobileNow = window.innerWidth < 768;
+
+    
+    let baseTranslateY = window.innerWidth < 1320 ? 1720 : 1520;
+    let baseTranslateX = window.innerWidth < 1320 ? 200 : 600;
+
+    
+    if (isMobileNow) {
+      baseTranslateY -= 300; 
+      baseTranslateX -= 150;  
+    }
+
+    animationValues.current.translateYFactor = baseTranslateY;
+    animationValues.current.translateXFactor = baseTranslateX;
+  };
+
+  updateFactors();
+  window.addEventListener("resize", updateFactors);
+
+  return () => {
+    window.removeEventListener("resize", updateFactors);
+  };
+}, []);
+
   useEffect(() => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 768);
     };
 
     checkMobile();
-    window.addEventListener("resize", checkMobile);
+
+    const handleResize = () => {
+      checkMobile();
+    };
+
+    window.addEventListener("resize", handleResize);
 
     return () => {
-      window.removeEventListener("resize", checkMobile);
+      window.removeEventListener("resize", handleResize);
     };
   }, []);
 
-  
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"]
+  const updateImagePosition = useCallback(() => {
+    const progress = currentProgress.current;
+    const translateY = animationValues.current.translateYFactor * progress;
+    const translateX = animationValues.current.translateXFactor * progress;
+
+    setImageStyle({
+    left: `${translateX}px`,
+    top: `${translateY}px`,
+    position: 'relative',
+    willChange: 'left, top', 
   });
+  }, []);
 
- 
-  const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001
-  });
+  const calculateOffsets = useCallback(() => {
+    if (!introSectionRef.current || !aboutSectionRef.current) return;
 
-  
-  const getAnimationValues = () => {
-    if (typeof window === 'undefined') return { y: 1720, x: 200 };
-    
-    const isTablet = window.innerWidth < 1320;
-    
-    if (isTablet) {
-      return { y: 1720, x: 200 };
-    } else {
-      return { y: 1520, x: 600 };
-    }
-  };
+    const introRect = introSectionRef.current.getBoundingClientRect();
+    const aboutRect = aboutSectionRef.current.getBoundingClientRect();
+    const windowHeight = window.innerHeight;
+    const scrollY = window.scrollY;
 
-  const { y: translateYFactor, x: translateXFactor } = getAnimationValues();
+    animationValues.current.startOffset =
+      introRect.top + scrollY + introRect.height - windowHeight * 0.7;
+    animationValues.current.endOffset = aboutRect.top + scrollY;
+    animationValues.current.windowHeight = windowHeight;
+  }, []);
 
-  
-  const translateY = useTransform(
-    smoothProgress, 
-    [0, 1], 
-    [0, translateYFactor]
-  );
-  
-  const translateX = useTransform(
-    smoothProgress, 
-    [0, 1], 
-    [0, translateXFactor]
-  );
+  useEffect(() => {
+    calculateOffsets();
+
+    const calculateProgress = () => {
+      if (
+        animationValues.current.startOffset === 0 &&
+        animationValues.current.endOffset === 0
+      ) {
+        calculateOffsets();
+        return 0;
+      }
+
+      const scrollY = window.scrollY;
+      const { startOffset, endOffset } = animationValues.current;
+
+      const progress = (scrollY - startOffset) / (endOffset - startOffset);
+      return Math.max(0, Math.min(1, progress));
+    };
+
+    const smoothUpdate = () => {
+      const diff = targetProgress.current - currentProgress.current;
+
+      if (Math.abs(diff) > 0.001) {
+        currentProgress.current += diff * 0.15;
+        updateImagePosition();
+        rafId.current = requestAnimationFrame(smoothUpdate);
+      } else {
+        currentProgress.current = targetProgress.current;
+        updateImagePosition();
+        rafId.current = null;
+      }
+    };
+
+    let lastScrollY = window.scrollY;
+    let ticking = false;
+
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+
+      if (Math.abs(scrollY - lastScrollY) < 5) return;
+      lastScrollY = scrollY;
+
+      if (!ticking) {
+        ticking = true;
+
+        requestAnimationFrame(() => {
+          const progress = calculateProgress();
+
+          if (progress > maxProgress.current) {
+            maxProgress.current = progress;
+          }
+
+          if (progress < maxProgress.current) {
+            targetProgress.current = progress;
+          } else {
+            
+            const maxAllowedProgress = isMobile ? 1.0 : 0.75;
+            targetProgress.current = Math.min(progress, maxAllowedProgress);
+            maxProgress.current = Math.min(maxProgress.current, isMobile ? 1.0 : 0.7);
+          }
+
+          if (!rafId.current) {
+            rafId.current = requestAnimationFrame(smoothUpdate);
+          }
+
+          ticking = false;
+        });
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    const handleResizeForOffsets = () => {
+      calculateOffsets();
+    };
+
+    window.addEventListener("resize", handleResizeForOffsets);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleResizeForOffsets);
+      if (rafId.current) {
+        cancelAnimationFrame(rafId.current);
+      }
+    };
+  }, [isMobile, calculateOffsets, updateImagePosition]);
 
   const scrollToElement = (elementId: string) => {
     const element = document.getElementById(elementId);
@@ -80,8 +197,12 @@ const Main = () => {
       <div className={styles.main__lines}></div>
       <div className={styles.composition__bg}></div>
 
-      <main className={styles.main} ref={containerRef}>
-        <section className={styles.main__intro} id="main__intro">
+      <main className={styles.main}>
+        <section
+          className={styles.main__intro}
+          id="main__intro"
+          ref={introSectionRef}
+        >
           <div className={styles.intro__left}>
             <h1 className={styles.intro__title}>Najd</h1>
             <div className={styles.intro__description__pos}>
@@ -104,26 +225,18 @@ const Main = () => {
               <span>04</span>
             </p>
           </div>
-          
+
          
-         <div className={styles.intro__image}>
-            
-            <motion.div
-  style={{
-    translateY: translateY,  
-    translateX: translateX, 
-    willChange: "transform"
-  }}
->
-              <Image
-                src="/parfume.png"
-                width={760}      
-                height={1160}    
-                alt="parfume"
-                priority={true}
-              />
-            </motion.div>
-          </div>
+          <Image
+            ref={imageRef}
+            src="/parfume.png"
+            width={760}
+            height={1160}
+            alt="parfume"
+            className={styles.intro__image}
+            style={imageStyle}
+            priority={true}
+          />
 
           <div className={styles.intro__description}>
             <p>
@@ -137,8 +250,11 @@ const Main = () => {
           </div>
         </section>
 
-       
-        <section className={styles.main__about}>
+        <section
+  className={styles.main__about}
+  ref={aboutSectionRef}
+  style={isMobile ? { paddingBottom: '500px' } : {}}
+>
           <div className={styles.main__text}>
             <h2>Lorem ipsum dolor sit amet, consectetur</h2>
             <p>
@@ -184,6 +300,7 @@ const Main = () => {
               <p className={styles.description}>Lorem ipsum, Dolor sit amet</p>
             </div>
             <div className={styles.rect}>
+              {" "}
               <p className={styles.title}>Excepteur sint</p>
               <p className={styles.description}>
                 Lorem ipsum, Dolor sit amet, Consectetur adipiscing elit, Sed do
@@ -191,6 +308,7 @@ const Main = () => {
               </p>
             </div>
             <div className={styles.rect}>
+              {" "}
               <p className={styles.title}>Sed do eiusmod</p>
               <p className={styles.description}>
                 Lorem ipsum, Dolor sit amet, Consectetur adipiscing elit, Sed do

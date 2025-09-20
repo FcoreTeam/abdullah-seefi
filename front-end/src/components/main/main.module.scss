@@ -3,7 +3,7 @@
     background: url('/bg.jpg');
     height: 2090px;
     background-size: cover;
-
+    top:100px;
     background-repeat: no-repeat;
     position: absolute;
     z-index: -1;
@@ -17,6 +17,7 @@
     width: 90%;
     height: 4630px;
     z-index: 5;
+   
     border-right: 1px solid #E5DFDA33;
     border-left: 1px solid #E5DFDA33;
 }

@@ -51,32 +51,10 @@
     bottom: 0;
     
    
-    background: url('/bg_footer1920.png');
+    background: url('/bg_footer.png');
 }
 
 
-@media (max-width: 1600px) {
-    .bg__footer {
-        background: url('/bg_footer1600.png');
-    }
-}
-
-
-
-@media (max-width: 768px) {
-    .bg__footer {
-        background: url('/bg_footer768.png');
-      
-    }
-}
-
-
-@media (max-width: 350px) {
-    .bg__footer {
-        background: url('/bg_footer350.png');
-       
-    }
-}
 
 .page__navigator {
     display: flex;

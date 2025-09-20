@@ -20,7 +20,7 @@ const Header = () => {
           <div className={styles.logo__wrap}>
             <Image
               alt="logo"
-              src="/logoNew.svg"
+              src="/logo.svg"
               width={1000}
               height={1000}
               className={styles.header__logo}

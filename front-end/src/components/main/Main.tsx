@@ -24,30 +24,28 @@ const Main = () => {
   });
 
   useEffect(() => {
-  const updateFactors = () => {
-    const isMobileNow = window.innerWidth < 768;
+    const updateFactors = () => {
+      const isMobileNow = window.innerWidth < 768;
 
-    
-    let baseTranslateY = window.innerWidth < 1320 ? 1720 : 1520;
-    let baseTranslateX = window.innerWidth < 1320 ? 200 : 600;
+      let baseTranslateY = window.innerWidth < 1320 ? 1720 : 1520;
+      let baseTranslateX = window.innerWidth < 1320 ? 200 : 600;
 
-    
-    if (isMobileNow) {
-      baseTranslateY -= 300; 
-      baseTranslateX -= 150;  
-    }
+      if (isMobileNow) {
+        baseTranslateY -= 300;
+        baseTranslateX -= 150;
+      }
 
-    animationValues.current.translateYFactor = baseTranslateY;
-    animationValues.current.translateXFactor = baseTranslateX;
-  };
+      animationValues.current.translateYFactor = baseTranslateY;
+      animationValues.current.translateXFactor = baseTranslateX;
+    };
 
-  updateFactors();
-  window.addEventListener("resize", updateFactors);
+    updateFactors();
+    window.addEventListener("resize", updateFactors);
 
-  return () => {
-    window.removeEventListener("resize", updateFactors);
-  };
-}, []);
+    return () => {
+      window.removeEventListener("resize", updateFactors);
+    };
+  }, []);
 
   useEffect(() => {
     const checkMobile = () => {
@@ -73,11 +71,11 @@ const Main = () => {
     const translateX = animationValues.current.translateXFactor * progress;
 
     setImageStyle({
-    left: `${translateX}px`,
-    top: `${translateY}px`,
-    position: 'relative',
-    willChange: 'left, top', 
-  });
+      left: `${translateX}px`,
+      top: `${translateY}px`,
+      position: "relative",
+      willChange: "left, top",
+    });
   }, []);
 
   const calculateOffsets = useCallback(() => {
@@ -149,10 +147,9 @@ const Main = () => {
           if (progress < maxProgress.current) {
             targetProgress.current = progress;
           } else {
-            
-            const maxAllowedProgress = isMobile ? 1.0 : 0.75;
+            const maxAllowedProgress = 0.75;
             targetProgress.current = Math.min(progress, maxAllowedProgress);
-            maxProgress.current = Math.min(maxProgress.current, isMobile ? 1.0 : 0.7);
+            maxProgress.current = Math.min(maxProgress.current, 0.7);
           }
 
           if (!rafId.current) {
@@ -200,7 +197,7 @@ const Main = () => {
       <main className={styles.main}>
         <section
           className={styles.main__intro}
-          id="main__intro"
+          id="intro"
           ref={introSectionRef}
         >
           <div className={styles.intro__left}>
@@ -226,7 +223,6 @@ const Main = () => {
             </p>
           </div>
 
-         
           <Image
             ref={imageRef}
             src="/parfume.png"
@@ -251,10 +247,11 @@ const Main = () => {
         </section>
 
         <section
-  className={styles.main__about}
-  ref={aboutSectionRef}
-  style={isMobile ? { paddingBottom: '500px' } : {}}
->
+          className={styles.main__about}
+          ref={aboutSectionRef}
+          style={isMobile ? { paddingBottom: "500px" } : {}}
+          id="about"
+        >
           <div className={styles.main__text}>
             <h2>Lorem ipsum dolor sit amet, consectetur</h2>
             <p>
@@ -281,7 +278,7 @@ const Main = () => {
           </div>
         </section>
 
-        <section className={styles.main__composition}>
+        <section className={styles.main__composition} id="composition">
           <h2>Sed do eiusmod tempor incididunt</h2>
           <div className={styles.navigator__wrap}>
             <p className={styles.page__navigator}>
@@ -357,7 +354,7 @@ const Main = () => {
           </p>
         </section>
 
-        <section className={styles.main__form}>
+        <section className={styles.main__form} id="form">
           <h2>Nemo enim ipsam voluptatem quia sit</h2>
           <div className={styles.form__wrap}>
             <p className={styles.form__text}>
@@ -384,7 +381,7 @@ const Main = () => {
           <div className={styles.plug}></div>
           <div
             className={styles.intro__info}
-            onClick={() => scrollToElement("main__intro")}
+            onClick={() => scrollToElement("intro")}
           >
             <p>نص نص</p>
           </div>

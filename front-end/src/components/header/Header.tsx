@@ -12,6 +12,16 @@ const Header = () => {
     setOpen(isOpen);
     console.log(isOpen);
   };
+
+  const scrollToElement = (elementId: string) => {
+    const element = document.getElementById(elementId);
+    if (element) {
+      element.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
+  };
   return (
     <>
       <HeaderMenu isOpen={isOpen} setHandle={setOpen} />
@@ -30,7 +40,12 @@ const Header = () => {
 
           <div className={styles.header__menu}>
             {routes.map((item) => (
-              <p key={item.routeID}>{item.name}</p>
+              <p
+                key={item.routeID}
+                onClick={() => scrollToElement(item.routeID)}
+              >
+                {item.name}
+              </p>
             ))}
           </div>
           <div

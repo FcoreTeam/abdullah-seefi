@@ -3,7 +3,7 @@
     background: url('/bg.jpg');
     height: 2090px;
     background-size: cover;
-    top:100px;
+    top: 100px;
     background-repeat: no-repeat;
     position: absolute;
     z-index: -1;
@@ -17,7 +17,7 @@
     width: 90%;
     height: 4630px;
     z-index: 5;
-   
+
     border-right: 1px solid #E5DFDA33;
     border-left: 1px solid #E5DFDA33;
 }
@@ -44,14 +44,12 @@
 .bg__footer {
     width: 100%;
     height: 1300px;
-    background-size: cover;
-    background-repeat: no-repeat;
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
     position: absolute;
     z-index: -1;
     bottom: 0;
-    
-   
-    background: url('/bg_footer.png');
+    background: url('/bg_footer1920.png');
 }
 
 
@@ -609,6 +607,11 @@
 }
 
 @media(max-width: 1583px) {
+    .bg__footer {
+        background-size: cover;
+        background: url('/bg_footer1600.png');
+    }
+
     .main {
         .main__intro {
             .intro__image {
@@ -827,7 +830,7 @@
 
 @media(max-width: 768px) {
     .main__lines {
-        height: 3614px !important;
+        height: 100% !important;
     }
 
     .main__bg {
@@ -840,6 +843,13 @@
         margin-top: 1700px;
     }
 
+
+    .bg__footer {
+
+        background-repeat: repeat !important;
+        background-size: 50% 50%;
+        background: url('/bg_footer768.png');
+    }
 
     .main {
         .page__navigator {
@@ -1002,10 +1012,7 @@
         }
     }
 
-    .bg__footer {
-        height: 1200px;
-        background-size: cover;
-    }
+
 }
 
 @media(max-width: 615px) {
@@ -1068,9 +1075,18 @@
     }
 }
 
+
 @media(max-width: 430px) {
+    .bg__footer {
+        background: url('/bg_footer420.png');
+        background-size: contain !important;
+        background-repeat: repeat;
+        height: 1000px;
+
+    }
+
     .main__lines {
-        height: 3800px;
+        height: 100% !important;
     }
 
     .main {
@@ -1080,7 +1096,17 @@
 
 
             .intro__info {
-                margin-top: 70px;
+                left: -50px !important;
+                top: 260px;
+                width: 100px;
+                margin-top: 30px;
+                padding: 0;
+
+                >p {
+                    font-size: 12px;
+                    display: flex;
+                    justify-content: center;
+                }
             }
 
             .plug {
@@ -1089,6 +1115,15 @@
 
             }
 
+            .designed__by {
+                right: 0;
+                bottom:
+                    100px;
+            }
+
+            .copyright {
+                margin-bottom: 0px;
+            }
         }
 
         .main__composition {

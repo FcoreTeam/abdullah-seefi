@@ -5,6 +5,15 @@ interface Props {
   setHandle: (isOpen: false) => void;
   isOpen: boolean;
 }
+const scrollToElement = (elementId: string) => {
+  const element = document.getElementById(elementId);
+  if (element) {
+    element.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  }
+};
 const HeaderMenu = ({ setHandle, isOpen }: Props) => {
   return (
     <div className={clsx(styles.header__menu, isOpen && styles.open)}>
@@ -16,7 +25,9 @@ const HeaderMenu = ({ setHandle, isOpen }: Props) => {
       </div>
       <section className={styles.menu__content}>
         {routes.map((item) => (
-          <p key={item.routeID}>{item.name}</p>
+          <p key={item.routeID} onClick={() => scrollToElement(item.routeID)}>
+            {item.name}
+          </p>
         ))}
       </section>
       <p className={styles.menu__phone}>+12 3454 6575 32</p>

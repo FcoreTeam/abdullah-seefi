@@ -1,7 +1,11 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  images: {
+    domains: ["mylabparfume.com"],
+    unoptimized: true,
+  },
+  distDir: "dist",
 };
 
 export default nextConfig;

@@ -30,7 +30,7 @@ const HeaderMenu = ({ setHandle, isOpen }: Props) => {
           </p>
         ))}
       </section>
-      <p className={styles.menu__phone}>+12 3454 6575 32</p>
+      <p className={styles.menu__phone}>+971 58 586 1961</p>
     </div>
   );
 };

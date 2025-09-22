@@ -15,7 +15,7 @@
     position: absolute;
     pointer-events: none;
     width: 90%;
-    height: 4630px;
+    height: 100% !important;
     z-index: 5;
 
     border-right: 1px solid #E5DFDA33;
@@ -269,7 +269,7 @@
         width: 100%;
         display: flex;
         justify-content: space-between;
-        height: 800px;
+        height: 1100px;
         position: relative;
         margin-top: 300px;
         border-bottom: 1px solid #E5DFDA33;
@@ -403,7 +403,7 @@
         .title {
             color: #fff;
             width: 100%;
-            font-size: 32px;
+            font-size: 24px;
             text-align: center;
             font-family: var(--font-cormorant);
             transition: all 0.3s ease;
@@ -417,7 +417,7 @@
         }
 
         .description {
-            font-size: 22px;
+            font-size: 18px;
             font-family: var(--font-inter);
             color: #E5DFDACC;
             width: 50%;
@@ -475,8 +475,17 @@
             color: #E5DFDACC;
             position: absolute;
             bottom: 50px;
+            text-decoration: none;
             font-family: var(--font-cormorant);
             font-size: 39px;
+        }
+
+        .designed__by {
+            transition: .3s;
+
+            &:hover {
+                color: #fff;
+            }
         }
 
         .copyright {
@@ -691,6 +700,7 @@
                 display: flex;
                 width: 100%;
                 left: 0;
+                bottom: 250px;
                 margin-top: 20px;
                 justify-content: center;
 
@@ -756,7 +766,7 @@
                     border: 1px solid #ffffff33;
 
                     .title {
-                        font-size: 22px;
+                        font-size: 18px;
                         color: #fff;
                     }
 

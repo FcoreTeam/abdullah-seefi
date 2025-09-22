@@ -81,12 +81,12 @@ const MainForm = () => {
       message: true,
     });
 
-   /*  setFormSubmitted(true); */
+    /*  setFormSubmitted(true); */
 
     if (validateAllFields()) {
       try {
         await sendForm(data);
-      /*   setFormSubmitted(false); */
+        /*   setFormSubmitted(false); */
         setFormData({
           name: "",
           message: "",
@@ -103,7 +103,7 @@ const MainForm = () => {
   return (
     <div className={styles.main__form}>
       <div className={styles.form__inputs}>
-        <p>Your name</p>
+        <p>اسمك</p>
         <div
           className={clsx(
             styles.input__wrap,
@@ -139,7 +139,7 @@ const MainForm = () => {
           </div>
         </div>
 
-        <p>Your email</p>
+        <p>البريد الإلكتروني الخاص بك</p>
         <div
           className={clsx(
             styles.input__wrap,
@@ -175,7 +175,7 @@ const MainForm = () => {
           </div>
         </div>
 
-        <p>Message</p>
+        <p>رسالة</p>
         <div
           className={clsx(
             styles.input__wrap,
@@ -214,7 +214,7 @@ const MainForm = () => {
         </div>
       </div>
 
-      <button onClick={() => sendFormUi(formData)}>Send</button>
+      <button onClick={() => sendFormUi(formData)}>إرسال البريد</button>
     </div>
   );
 };

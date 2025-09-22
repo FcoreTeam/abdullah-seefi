@@ -27,12 +27,12 @@ const Main = () => {
     const updateFactors = () => {
       const isMobileNow = window.innerWidth < 768;
 
-      let baseTranslateY = window.innerWidth < 1320 ? 1720 : 1520;
+      let baseTranslateY = window.innerWidth < 1320 ? 1120 : 1520;
       let baseTranslateX = window.innerWidth < 1320 ? 200 : 600;
 
       if (isMobileNow) {
-        baseTranslateY -= 300;
-        baseTranslateX -= 150;
+        baseTranslateY = 1420;
+        baseTranslateX = 0;
       }
 
       animationValues.current.translateYFactor = baseTranslateY;
@@ -204,8 +204,8 @@ const Main = () => {
             <h1 className={styles.intro__title}>Najd</h1>
             <div className={styles.intro__description__pos}>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                مع ساش، كل دخول يبدأ قصة جديدة. ادخل إلى عالم تلتقي فيه الأناقة
+                بالعمق. ساش تحيطك بالثقة وهالة متألقة تلفت الأنظار.
               </p>
             </div>
             <div className={styles.intro__info}>
@@ -236,8 +236,8 @@ const Main = () => {
 
           <div className={styles.intro__description}>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              مع ساش، كل دخول يبدأ قصة جديدة. ادخل إلى عالم تلتقي فيه الأناقة
+              بالعمق. ساش تحيطك بالثقة وهالة متألقة تلفت الأنظار.
             </p>
             <div className={styles.scroll__particle}>
               <i></i>
@@ -253,16 +253,11 @@ const Main = () => {
           id="about"
         >
           <div className={styles.main__text}>
-            <h2>Lorem ipsum dolor sit amet, consectetur</h2>
+            <h2>عن عطرنا</h2>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris.
-              Duis aute irure dolor in reprehenderit in voluptate velit esse
-              cillum. Excepteur sint occaecat cupidatat non proident. Sunt in
-              culpa qui officia deserunt mollit anim id est laborum. Nemo enim
-              ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit.
-              Neque
+              أكثر من مجرد عطر، ساش هو عطركِ الخاص من الصباح إلى المساء. دعِ
+              حضوركِ يعبر عنكِ أكثر من الكلمات. جربي ساش، العطر الذي سيُصبح
+              جزءًا من قصتكِ، جريء ومتوازن، مصمم لمن يُقدّرون الأناقة والعمق.
             </p>
             <div className={styles.navigator__wrap}>
               <p className={styles.page__navigator}>
@@ -279,7 +274,7 @@ const Main = () => {
         </section>
 
         <section className={styles.main__composition} id="composition">
-          <h2>Sed do eiusmod tempor incididunt</h2>
+          <h2>تركيبة العطر</h2>
           <div className={styles.navigator__wrap}>
             <p className={styles.page__navigator}>
               <span>01</span>
@@ -325,46 +320,43 @@ const Main = () => {
             </svg>
             <div className={styles.content}>
               <div className={styles.top}>
-                <p className={styles.title}>Duis aute</p>
+                <p className={styles.title}>أعلى الملاحظات</p>
                 <p className={styles.description}>
-                  Lorem ipsum, Dolor sit amet
+                  الجلد – غني وحسّي، يضيف العمق والأناقة.
                 </p>
               </div>
               <div className={styles.middle}>
-                <p className={styles.title}>Excepteur sint</p>
+                <p className={styles.title}>الملاحظات الوسطى</p>
                 <p className={styles.description}>
-                  Lorem ipsum, Dolor sit amet, Consectetur adipiscing elit, Sed
-                  do eiusmod, Tempor incididunt
+                  لُوبان – دافئ، غامض وروحاني، يخلق الهدوء والقوة.
                 </p>
               </div>
               <div className={styles.bottom}>
-                <p className={styles.title}>Sed do eiusmod</p>
+                <p className={styles.title}>الملاحظات السفلية</p>
                 <p className={styles.description}>
-                  Lorem ipsum, Dolor sit amet, Consectetur adipiscing elit, Sed
-                  do eiusmod, Tempor incididunt, Ut labore et dolore, Magna
-                  aliqua
+                  نجيل الهند - ترابي، ثابت، خالد. التبغ - دخاني، جريء، غامض.
                 </p>
               </div>
             </div>
           </div>
           <p>
-            Excepteur sint occaecat cupidatat non proident. Sunt in culpa qui
-            officia deserunt mollit anim id est laborum. Nemo enim ipsam
-            voluptatem quia sit aspernatur aut odit aut fugit. Neque
+            تشكل هذه المكونات معًا مزيجًا جذابًا ومقويًا، مثاليًا للفرد العصري
+            الذي يقدر الأسلوب الحقيقي والمضمون.
           </p>
         </section>
 
         <section className={styles.main__form} id="form">
-          <h2>Nemo enim ipsam voluptatem quia sit</h2>
+          <h2>اتصل بنا</h2>
           <div className={styles.form__wrap}>
             <p className={styles.form__text}>
-              Thats possibly amazing web-site, because into this information is
-              very interesting
+              وراء كل عطر لا يُنسى، يكمن صاحب رؤية ثاقبة. مُبتكر عطر SASH هو
+              خبير عطور يتمتع بحدس عميق، ينسج العواطف والذكريات في كل قطرة.
             </p>
             <MainForm />
             <p className={styles.form__text}>
-              Thats possibly amazing web-site, because into this information is
-              very interesting
+              مسترشدًا بهذه الفكرة، اختار الجلد، وخشب اللوبان، ونجيل الهند،
+              والتبغ لإنشاء عطر SASH - وهو عطر جريء ومتوازن، غامض وحديث في نفس
+              الوقت.
             </p>
           </div>
           <div className={styles.navigator__wrap}>
@@ -386,7 +378,9 @@ const Main = () => {
             <p>نص نص</p>
           </div>
           <p className={styles.copyright}>© 2025. All rights reserved</p>
-          <p className={styles.designed__by}>Designed by Fcore</p>
+          <a href="https://fcore.tech" className={styles.designed__by}>
+            Designed by Fcore
+          </a>
         </section>
       </main>
       <div className={styles.bg__footer}></div>

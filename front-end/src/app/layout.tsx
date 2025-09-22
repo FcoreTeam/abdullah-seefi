@@ -6,7 +6,7 @@ import Header from "@/components/header/Header";
 
 export const metadata: Metadata = {
   title: "Najd",
-  description: "Parfume",
+  description: "Najd",
   icons: {
     icon: "/favicon.png",
   },

@@ -115,7 +115,7 @@ const HeaderMenu = ({ setHandle, isOpen })=>{
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                 className: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$header$2f$header$2d$menu$2f$header$2d$menu$2e$module$2e$scss__$5b$app$2d$ssr$5d$__$28$css__module$29$__["default"].menu__phone,
-                children: "+12 3454 6575 32"
+                children: "+971 58 586 1961"
             }, void 0, false, {
                 fileName: "[project]/src/components/header/header-menu/Header-menu.tsx",
                 lineNumber: 33,

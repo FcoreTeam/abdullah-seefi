@@ -26,6 +26,7 @@ const Main = () => {
   useEffect(() => {
     const updateFactors = () => {
       const isMobileNow = window.innerWidth < 768;
+      const isLowHeight = window.innerHeight < 836;
 
       let baseTranslateY = window.innerWidth < 1320 ? 1120 : 1520;
       let baseTranslateX = window.innerWidth < 1320 ? 200 : 600;
@@ -35,6 +36,9 @@ const Main = () => {
         baseTranslateX = 0;
       }
 
+      if (isLowHeight) {
+        baseTranslateY = 1250;
+      }
       animationValues.current.translateYFactor = baseTranslateY;
       animationValues.current.translateXFactor = baseTranslateX;
     };
@@ -288,23 +292,22 @@ const Main = () => {
           </div>
           <div className={styles.composition__wrap}>
             <div className={styles.rect}>
-              <p className={styles.title}>Duis aute</p>
-              <p className={styles.description}>Lorem ipsum, Dolor sit amet</p>
+              <p className={styles.title}>أعلى الملاحظات</p>
+              <p className={styles.description}>
+                الجلد – غني وحسّي، يضيف العمق والأناقة.
+              </p>
             </div>
             <div className={styles.rect}>
-              {" "}
-              <p className={styles.title}>Excepteur sint</p>
+              <p className={styles.title}>الملاحظات الوسطى</p>
               <p className={styles.description}>
-                Lorem ipsum, Dolor sit amet, Consectetur adipiscing elit, Sed do
-                eiusmod, Tempor incididunt
+                لوبان - دافئ، غامض وروحاني، يخلق الهدوء والقوة
               </p>
             </div>
             <div className={styles.rect}>
               {" "}
-              <p className={styles.title}>Sed do eiusmod</p>
+              <p className={styles.title}>الملاحظات السفلية</p>
               <p className={styles.description}>
-                Lorem ipsum, Dolor sit amet, Consectetur adipiscing elit, Sed do
-                eiusmod, Tempor incididunt, Ut labore et dolore, Magna aliqua
+                نجيل الهند - ترابي، ثابت، خالد. التبغ - دخاني، جريء، غامض.
               </p>
             </div>
           </div>

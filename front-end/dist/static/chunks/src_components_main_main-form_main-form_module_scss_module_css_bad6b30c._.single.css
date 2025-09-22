@@ -1,0 +1,133 @@
+/* [project]/src/components/main/main-form/main-form.module.scss.module.css [app-client] (css) */
+.main-form-module-scss-module__7SQzMG__main__form {
+  background: #000;
+  border: .91px solid rgba(229, 223, 218, .4);
+  border-radius: 5px;
+  flex-flow: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 35%;
+  height: 609px;
+  padding: 51px 59px;
+  display: flex;
+}
+
+.main-form-module-scss-module__7SQzMG__main__form .main-form-module-scss-module__7SQzMG__form__inputs {
+  width: 100%;
+}
+
+.main-form-module-scss-module__7SQzMG__main__form .main-form-module-scss-module__7SQzMG__form__inputs > p {
+  color: rgba(229, 223, 218, .8);
+  font-family: var(--font-inter);
+  font-size: 22px;
+  font-weight: 300;
+}
+
+.main-form-module-scss-module__7SQzMG__main__form .main-form-module-scss-module__7SQzMG__form__inputs .main-form-module-scss-module__7SQzMG__input__wrap {
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+  margin-top: 17px;
+  margin-bottom: 35px;
+  display: flex;
+  position: relative;
+}
+
+.main-form-module-scss-module__7SQzMG__main__form .main-form-module-scss-module__7SQzMG__form__inputs .main-form-module-scss-module__7SQzMG__input__wrap.main-form-module-scss-module__7SQzMG__error {
+  border: 1px solid red;
+  border-radius: 5px 100px 100px 5px;
+}
+
+.main-form-module-scss-module__7SQzMG__main__form .main-form-module-scss-module__7SQzMG__form__inputs .main-form-module-scss-module__7SQzMG__input__wrap .main-form-module-scss-module__7SQzMG__complete {
+  border: 1px solid #fff;
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
+  width: 35px;
+  height: 35px;
+  margin-right: 15px;
+  display: flex;
+  position: absolute;
+}
+
+.main-form-module-scss-module__7SQzMG__main__form .main-form-module-scss-module__7SQzMG__form__inputs .main-form-module-scss-module__7SQzMG__input__wrap .main-form-module-scss-module__7SQzMG__complete.main-form-module-scss-module__7SQzMG__active {
+  background: #fff;
+}
+
+.main-form-module-scss-module__7SQzMG__main__form .main-form-module-scss-module__7SQzMG__form__inputs .main-form-module-scss-module__7SQzMG__input__wrap .main-form-module-scss-module__7SQzMG__active__img {
+  filter: invert();
+}
+
+.main-form-module-scss-module__7SQzMG__main__form .main-form-module-scss-module__7SQzMG__form__inputs .main-form-module-scss-module__7SQzMG__input__wrap > input {
+  color: #fff;
+  background: linear-gradient(#000, #000) padding-box padding-box, linear-gradient(90deg, #e5dfda 4.97%, rgba(229, 223, 218, .1) 100%) border-box;
+  border: .91px solid rgba(0, 0, 0, 0);
+  border-top-right-radius: 100px;
+  border-bottom-right-radius: 100px;
+  outline: none;
+  width: 100%;
+  height: 52px;
+  padding-left: 10px;
+  font-size: 22px;
+}
+
+.main-form-module-scss-module__7SQzMG__main__form .main-form-module-scss-module__7SQzMG__form__inputs .main-form-module-scss-module__7SQzMG__input__wrap > input.main-form-module-scss-module__7SQzMG__error {
+  background: none;
+}
+
+.main-form-module-scss-module__7SQzMG__main__form .main-form-module-scss-module__7SQzMG__form__inputs .main-form-module-scss-module__7SQzMG__input__wrap > input:focus {
+  background: linear-gradient(#000, #000) padding-box padding-box, #fff border-box;
+  border: 1px solid rgba(0, 0, 0, 0);
+  outline: 0;
+}
+
+.main-form-module-scss-module__7SQzMG__main__form > button {
+  width: 100%;
+  min-height: 52px;
+  font-family: var(--font-inter);
+  color: #010101;
+  cursor: pointer;
+  background: #e5dfda;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+  font-size: 22px;
+  transition: all .3s;
+}
+
+.main-form-module-scss-module__7SQzMG__main__form > button:hover {
+  scale: 1.05;
+}
+
+@media (max-width: 1350px) {
+  .main-form-module-scss-module__7SQzMG__main__form {
+    width: 50%;
+  }
+}
+
+@media (max-width: 974px) {
+  .main-form-module-scss-module__7SQzMG__main__form {
+    width: 100%;
+  }
+}
+
+@media (max-width: 615px) {
+  .main-form-module-scss-module__7SQzMG__main__form .main-form-module-scss-module__7SQzMG__form__inputs > p, .main-form-module-scss-module__7SQzMG__main__form .main-form-module-scss-module__7SQzMG__form__inputs .main-form-module-scss-module__7SQzMG__input__wrap > input, .main-form-module-scss-module__7SQzMG__main__form > button {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 450px) {
+  .main-form-module-scss-module__7SQzMG__main__form {
+    height: 540px;
+  }
+}
+
+@media (max-width: 398px) {
+  .main-form-module-scss-module__7SQzMG__main__form {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+/*# sourceMappingURL=src_components_main_main-form_main-form_module_scss_module_css_bad6b30c._.single.css.map*/

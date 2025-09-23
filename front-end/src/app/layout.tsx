@@ -5,8 +5,8 @@ import "./globals.scss";
 import Header from "@/components/header/Header";
 
 export const metadata: Metadata = {
-  title: "Najd",
-  description: "Najd",
+  title: "My Lab",
+  description: "Parfume",
   icons: {
     icon: "/favicon.png",
   },

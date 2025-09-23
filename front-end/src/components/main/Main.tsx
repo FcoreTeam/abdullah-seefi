@@ -205,7 +205,7 @@ const Main = () => {
           ref={introSectionRef}
         >
           <div className={styles.intro__left}>
-            <h1 className={styles.intro__title}>Najd</h1>
+            <h1 className={styles.intro__title}>My Lab</h1>
             <div className={styles.intro__description__pos}>
               <p>
                 مع ساش، كل دخول يبدأ قصة جديدة. ادخل إلى عالم تلتقي فيه الأناقة

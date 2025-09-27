@@ -3,6 +3,7 @@
     background: url('/bg.jpg');
     height: 2090px;
     background-size: cover;
+    background-position: center;
     top: 100px;
     background-repeat: no-repeat;
     position: absolute;
@@ -1027,6 +1028,16 @@
 
 @media(max-width: 615px) {
     .main {
+        .main__intro {
+            .intro__left {
+                .intro__title {
+                    font-size: 100px;
+                    margin-top: 20px;
+                }
+
+            }
+        }
+
         .main__composition {
             >h2 {
                 color: #E5DFDA;

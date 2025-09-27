@@ -35,7 +35,7 @@ const Header = () => {
               height={1000}
               className={styles.header__logo}
             />
-            <p className={styles.header__name}>Abdullah Seefi</p>
+            <p className={styles.header__name}>A.S.</p>
           </div>
 
           <div className={styles.header__menu}>

@@ -142,7 +142,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$header$
 ;
 ;
 const metadata = {
-    title: "Najd",
+    title: "My Lab",
     description: "Parfume",
     icons: {
         icon: "/favicon.png"

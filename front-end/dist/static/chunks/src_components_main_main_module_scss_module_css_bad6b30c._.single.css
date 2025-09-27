@@ -1,7 +1,7 @@
 /* [project]/src/components/main/main.module.scss.module.css [app-client] (css) */
 .main-module-scss-module__ZgBEnG__main__bg {
   z-index: -1;
-  background: url("/bg.jpg") 0 0 / cover no-repeat;
+  background: url("/bg.jpg") center / cover no-repeat;
   width: 100%;
   height: 2090px;
   position: absolute;
@@ -931,6 +931,11 @@
 }
 
 @media (max-width: 615px) {
+  .main-module-scss-module__ZgBEnG__main .main-module-scss-module__ZgBEnG__main__intro .main-module-scss-module__ZgBEnG__intro__left .main-module-scss-module__ZgBEnG__intro__title {
+    margin-top: 20px;
+    font-size: 100px;
+  }
+
   .main-module-scss-module__ZgBEnG__main .main-module-scss-module__ZgBEnG__main__composition > h2 {
     color: #e5dfda;
   }

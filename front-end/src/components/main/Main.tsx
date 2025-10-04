@@ -208,8 +208,9 @@ const Main = () => {
             <h1 className={styles.intro__title}>My Lab</h1>
             <div className={styles.intro__description__pos}>
               <p>
-                مع ساش، كل دخول يبدأ قصة جديدة. ادخل إلى عالم تلتقي فيه الأناقة
-                بالعمق. ساش تحيطك بالثقة وهالة متألقة تلفت الأنظار.
+                أكثر من مجرد عطر، ساش هو عطركِ الخاص من الصباح إلى المساء. دع
+                حضوركِ يعبر عنكِ أكثر من الكلمات. ساش ، جري ومتوازن، مصمم لمن
+                يُقدّرون الأناقة والعمق
               </p>
             </div>
             <div className={styles.intro__info}>
@@ -293,22 +294,16 @@ const Main = () => {
           <div className={styles.composition__wrap}>
             <div className={styles.rect}>
               <p className={styles.title}>أعلى الملاحظات</p>
-              <p className={styles.description}>
-                الجلد – غني وحسّي، يضيف العمق والأناقة.
-              </p>
+              <p className={styles.description}>النوتة العليا</p>
             </div>
             <div className={styles.rect}>
               <p className={styles.title}>الملاحظات الوسطى</p>
-              <p className={styles.description}>
-                لوبان - دافئ، غامض وروحاني، يخلق الهدوء والقوة
-              </p>
+              <p className={styles.description}>نوتة القلب</p>
             </div>
             <div className={styles.rect}>
               {" "}
               <p className={styles.title}>الملاحظات السفلية</p>
-              <p className={styles.description}>
-                نجيل الهند - ترابي، ثابت، خالد. التبغ - دخاني، جريء، غامض.
-              </p>
+              <p className={styles.description}>القاعدة الاساسية</p>
             </div>
           </div>
           <div className={styles.compositionSVG}>
@@ -324,21 +319,15 @@ const Main = () => {
             <div className={styles.content}>
               <div className={styles.top}>
                 <p className={styles.title}>أعلى الملاحظات</p>
-                <p className={styles.description}>
-                  الجلد – غني وحسّي، يضيف العمق والأناقة.
-                </p>
+                <p className={styles.description}>النوتة العليا</p>
               </div>
               <div className={styles.middle}>
                 <p className={styles.title}>الملاحظات الوسطى</p>
-                <p className={styles.description}>
-                  لُوبان – دافئ، غامض وروحاني، يخلق الهدوء والقوة.
-                </p>
+                <p className={styles.description}>نوتة القلب</p>
               </div>
               <div className={styles.bottom}>
                 <p className={styles.title}>الملاحظات السفلية</p>
-                <p className={styles.description}>
-                  نجيل الهند - ترابي، ثابت، خالد. التبغ - دخاني، جريء، غامض.
-                </p>
+                <p className={styles.description}>القاعدة الاساسية </p>
               </div>
             </div>
           </div>
@@ -357,9 +346,8 @@ const Main = () => {
             </p>
             <MainForm />
             <p className={styles.form__text}>
-              مسترشدًا بهذه الفكرة، اختار الجلد، وخشب اللوبان، ونجيل الهند،
-              والتبغ لإنشاء عطر SASH - وهو عطر جريء ومتوازن، غامض وحديث في نفس
-              الوقت.
+              رضاك هو اولويتنا : الضمان الذهبي يكفل لك حق استرجاع كامل المبلغ في
+              حال عدم رضاك عن المنتج.
             </p>
           </div>
           <div className={styles.navigator__wrap}>

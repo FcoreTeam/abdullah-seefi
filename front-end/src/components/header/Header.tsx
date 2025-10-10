@@ -55,7 +55,7 @@ const Header = () => {
           >
             <span></span>
           </div>
-          <div className={styles.header__phone}>+12 3454 6575 32</div>
+          <div className={styles.header__phone}>+971 58 586 1961</div>
         </div>
       </header>
     </>

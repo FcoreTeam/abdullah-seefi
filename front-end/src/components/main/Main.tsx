@@ -213,8 +213,13 @@ const Main = () => {
                 يُقدّرون الأناقة والعمق
               </p>
             </div>
-            <div className={styles.intro__info}>
-              <p>نص نص</p>
+            <div
+              className={styles.intro__info}
+              onClick={() => {
+                scrollToElement("form");
+              }}
+            >
+              <p>اكتب طلبا</p>
             </div>
 
             <p className={styles.page__navigator}>
@@ -260,9 +265,8 @@ const Main = () => {
           <div className={styles.main__text}>
             <h2>عن عطرنا</h2>
             <p>
-              أكثر من مجرد عطر، ساش هو عطركِ الخاص من الصباح إلى المساء. دع
-              حضوركِ يعبر عنكِ أكثر من الكلمات. ساش ، جري ومتوازن، مصمم لمن
-              يُقدّرون الأناقة والعمق
+              دع وجودك يتحدث بصوت أعلى من الكلمات. تجربة ساش -العطر الذي يصبح
+              جزءا من قصتك.
             </p>
             <div className={styles.navigator__wrap}>
               <p className={styles.page__navigator}>
@@ -294,16 +298,16 @@ const Main = () => {
           <div className={styles.composition__wrap}>
             <div className={styles.rect}>
               <p className={styles.title}>أعلى الملاحظات</p>
-              <p className={styles.description}>النوتة العليا</p>
+              <p className={styles.description}> جلد </p>
             </div>
             <div className={styles.rect}>
               <p className={styles.title}>الملاحظات الوسطى</p>
-              <p className={styles.description}>نوتة القلب</p>
+              <p className={styles.description}> نجيل الهند وتيليا </p>
             </div>
             <div className={styles.rect}>
               {" "}
               <p className={styles.title}>الملاحظات السفلية</p>
-              <p className={styles.description}>القاعدة الاساسية</p>
+              <p className={styles.description}>لبان والمسك</p>
             </div>
           </div>
           <div className={styles.compositionSVG}>
@@ -319,15 +323,15 @@ const Main = () => {
             <div className={styles.content}>
               <div className={styles.top}>
                 <p className={styles.title}>أعلى الملاحظات</p>
-                <p className={styles.description}>النوتة العليا</p>
+                <p className={styles.description}> جلد </p>
               </div>
               <div className={styles.middle}>
                 <p className={styles.title}>الملاحظات الوسطى</p>
-                <p className={styles.description}>نوتة القلب</p>
+                <p className={styles.description}> نجيل الهند وتيليا </p>
               </div>
               <div className={styles.bottom}>
                 <p className={styles.title}>الملاحظات السفلية</p>
-                <p className={styles.description}>القاعدة الاساسية </p>
+                <p className={styles.description}>لبان والمسك</p>
               </div>
             </div>
           </div>
@@ -366,7 +370,7 @@ const Main = () => {
             className={styles.intro__info}
             onClick={() => scrollToElement("intro")}
           >
-            <p>نص نص</p>
+            <p>العودة إلى الصفحة الرئيسية</p>
           </div>
           <p className={styles.copyright}>© 2025. All rights reserved</p>
           <a href="https://fcore.tech" className={styles.designed__by}>
